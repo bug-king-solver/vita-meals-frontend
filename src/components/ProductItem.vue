@@ -2,7 +2,9 @@
     <div
       class="product-card m-3 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
     >
+      <RouterLink :to="{ name: 'product_details', params: { id: props.product.id } }">
         <img class="p-2 rounded-t-lg w-[300px]" :src="props.product.image_url" alt="product image" />
+      </RouterLink>  
       <div class="px-5 pb-5">
         <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
             {{ props.product.title }}
@@ -23,6 +25,7 @@
   </template>
 
 <script setup lang="ts">
+import { RouterLink } from 'vue-router';
 import { Product } from '../types';
 
 const props = defineProps<{
