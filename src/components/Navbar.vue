@@ -24,7 +24,7 @@ import { RouterLink } from "vue-router";
           <div class="md:flex items-center">
             <div class="flex flex-col md:flex-row md:mx-6">
               <RouterLink to="/" class="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0">Products</RouterLink>
-              <RouterLink to="register" class="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0">Sign Up</RouterLink>
+              <RouterLink to="signup" class="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0">Sign Up</RouterLink>
               <RouterLink to="login" class="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0">Sign In</RouterLink>
               <div class="cursor-pointer my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0">Sign Out</div>
             </div>
