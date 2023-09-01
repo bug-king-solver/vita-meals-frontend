@@ -3,8 +3,8 @@
         <div class="m-3 grid place-items-center">
             <ProductSearchBox @handle-search="handleSubmit" />
         </div>
-        
         <div class="flex flex-wrap justify-center mt-3">
+            <ProductItem v-for="product in store.products" :product="product" :key="product.id"></ProductItem>
         </div>
     </div>
     
@@ -12,6 +12,11 @@
 
 <script setup lang="ts">
 import ProductSearchBox from './ProductSearchBox.vue';
+import {useProductStore} from '../store'
+import ProductItem from './ProductItem.vue';
+
+const store = useProductStore();
+store.fetchAllProducts({'keyword': ''});
 const handleSubmit = () => {
 
 }
