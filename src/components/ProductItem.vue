@@ -5,10 +5,26 @@
       <RouterLink :to="{ name: 'product_details', params: { id: props.product.id } }">
         <img class="p-2 rounded-t-lg w-[300px]" :src="props.product.image_url" alt="product image" />
       </RouterLink>  
+      
       <div class="px-5 pb-5">
-        <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
-            {{ props.product.title }}
-        </h5>
+        <div class="flex justify-between my-2">
+          <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
+              {{ props.product.title }}
+          </h5>
+          <div class="flex">
+            <div class="flex items-center px-2 cursor-pointer hover:bg-purple-400">
+              <svg class="fill-current text-gray-600 w-3" viewBox="0 0 448 512">
+                  <path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/>
+              </svg>
+            </div>
+            <input class="mx-2 border rounded-md text-center w-10" type="number">
+            <div class="flex items-center px-2 cursor-pointer hover:bg-purple-400">
+              <svg class="fill-current text-gray-600 w-3" viewBox="0 0 448 512">
+                  <path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/>
+              </svg>
+            </div>
+          </div>
+        </div>
         <div class="flex items-center justify-between">
           <span class="text-3xl font-bold text-gray-900 dark:text-white"
             >${{ props.product.price }}</span
