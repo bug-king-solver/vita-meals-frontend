@@ -1,7 +1,7 @@
 <template>
     <div class="h-screen flex flex-wrap justify-center items-center">
         <div class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow font-Roboto sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
-            <form class="space-y-6" @submit.prevent="registerUser">
+            <form class="space-y-6" @submit.prevent="signUpUser">
                 <h5 class="text-xl text-center font-medium text-gray-900 dark:text-white">Create your account</h5>
                 <div>
                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your name</label>
@@ -21,7 +21,7 @@
                 </div>
                 <button type="submit" class="w-full text-white bg-purple-600 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800">Register</button>
                 <div class="text-sm text-center font-medium text-gray-500 dark:text-gray-300">
-                    Already registered? <RouterLink to="signin" class="text-purple-700 hover:underline dark:text-purple-500">Login here</RouterLink>
+                    Already registered? <RouterLink to="signin" class="text-purple-700 hover:underline dark:text-purple-500">Signin here</RouterLink>
                 </div>
             </form>
         </div>
@@ -31,12 +31,56 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import { useRouter, RouterLink } from 'vue-router';
+import { useFlash } from '../common/useFlash';
+import Api from '../apis';
 
-const name = ref('');
-const email = ref('');
-const password = ref('');
-const password2 = ref('');
-const registerUser = () => {
+const name = ref(null);
+const email = ref(null);
+const password = ref(null);
+const password2 = ref(null);
 
+const router = useRouter();
+const { flash } = useFlash();
+
+const signUpUser = () => {
+    let errorStatus = '';
+    let payload = {
+        'name': name.value,
+        'email': email.value,
+        'password': password.value
+    }
+    Api.post('signup', payload)
+    .then((response) => {
+        let result = response.data;
+        console.log(result);
+        if (! result.error) {            
+            flash({
+                iconType: "success",
+                title: "Registration Completed",
+                message: result.message
+            });
+            setTimeout(()=>{
+                router.push('signin');
+            }, 2000);
+        } else {
+            flash({
+                iconType: "error",
+                title: "Registration Error",
+                message: result.message
+            });
+        }
+    }).catch(error => {
+        if (!error.response) {
+            errorStatus = 'Error: Network Error';
+        } else {
+            errorStatus = error.response.data.message;
+        }
+        flash({
+            iconType: "error",
+            title: "Registration Error",
+            message: errorStatus
+        });
+    })
 }
 </script>

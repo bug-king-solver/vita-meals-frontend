@@ -22,11 +22,18 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import { useAuthStore } from '../store';
 
-const email = ref('');
-const password = ref('');
+const email = ref(null);
+const password = ref(null);
+
+const store = useAuthStore();
 
 const authenticateUser = () => {
-    
+    const payload = {
+        "email": email.value,
+        "password": password.value,
+    }
+    store.signin(payload);
 }
 </script>
