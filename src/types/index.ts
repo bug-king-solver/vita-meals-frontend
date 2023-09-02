@@ -11,5 +11,11 @@ export interface ProductsState {
 }
 
 export interface RootState {
-    
+
+}
+
+export interface FlashOptions {
+    iconType: any;
+    title: string;
+    message: string;
 }
