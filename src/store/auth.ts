@@ -104,7 +104,7 @@ export const useAuthStore = defineStore('auth', () => {
                 iconType: "error",
                 title: "auth error",
                 message: errorStatus
-            })
+          })
         })
     }
 
