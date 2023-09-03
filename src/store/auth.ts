@@ -37,8 +37,9 @@ export const useAuthStore = defineStore('auth', () => {
           const result = response.data
           console.log(result)
           if (!result.error) {
-            user.value = result.user
-            token.value = result.authorisation.token
+            user.value = result.user;
+            token.value = result.authorisation.token;
+            localStorage.setItem("token", token.value);
             router.push("/");
           } else {
             flash({
@@ -77,7 +78,7 @@ export const useAuthStore = defineStore('auth', () => {
       }
 
       let errorStatus = '';
-      
+
       Api
         .post<AuthResponse>('signout', {}, getHeadersConfig())
         .then((response) => {
@@ -115,8 +116,10 @@ export const useAuthStore = defineStore('auth', () => {
         }
       }
     }
-
     return { user, token, signin, signout, isAuthenticated, getHeadersConfig }
+  },
+  {
+    persist: true
   }
 )
 export default useAuthStore;
