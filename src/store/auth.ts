@@ -3,6 +3,7 @@ import { computed, ref, Ref } from 'vue'
 import { useRouter } from 'vue-router'
 import Api from '../apis'
 import { useFlash } from '../common/useFlash'
+import { SignInPayload } from '../types'
 
 interface User {
   // Define the shape of the User object here
@@ -27,14 +28,14 @@ export const useAuthStore = defineStore('auth', () => {
     const user: Ref<User | null> = ref(null)
     const token: Ref<string | null> = ref(null)
 
-    function signin(payload: any) {
+    function signin(payload: SignInPayload) {
       let errorStatus = ''
 
       Api
         .post<AuthResponse>('signin', payload)
         .then((response) => {
           const result = response.data
-
+          console.log(result)
           if (!result.error) {
             user.value = result.user
             token.value = result.authorisation.token
@@ -75,7 +76,8 @@ export const useAuthStore = defineStore('auth', () => {
         return
       }
 
-      let errorStatus = ''
+      let errorStatus = '';
+      
       Api
         .post<AuthResponse>('signout', {}, getHeadersConfig())
         .then((response) => {

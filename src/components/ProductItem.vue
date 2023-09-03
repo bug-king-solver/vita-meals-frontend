@@ -9,7 +9,9 @@
       <div class="px-5 pb-5">
         <div class="flex justify-between my-2">
           <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
+            <RouterLink :to="{ name: 'product_details', params: { id: props.product.id } }">
               {{ props.product.title }}
+            </RouterLink>
           </h5>
           <div class="flex">
             <div @click.prevent="decrementCount" class="flex items-center px-2 cursor-pointer hover:bg-purple-400">
@@ -41,13 +43,20 @@
   </template>
 
 <script setup lang="ts">
-import { RouterLink } from 'vue-router';
+import { RouterLink, useRouter } from 'vue-router';
 import { Product } from '../types';
 import { ref } from 'vue';
+import { useFlash } from '../common/useFlash';
+import { useAuthStore } from '../store';
 
 const props = defineProps<{
   product: Product;
 }>();
+
+const router = useRouter();
+const {flash} = useFlash();
+
+const authStore = useAuthStore();
 
 const count = ref(1)
 
@@ -63,5 +72,18 @@ const incrementCount = () => {
   
 }
 
-const handAddToCart = () => {}
+const handAddToCart = () => {
+  if (authStore.isAuthenticated) {
+    
+  } else {
+    flash({
+      iconType: "warning",
+      title: "Unauthenticated",
+      message: 'Please sign in first!'
+    })
+    setTimeout(() => {
+      router.push('signin')
+    }, 1500)
+  }
+}
 </script>

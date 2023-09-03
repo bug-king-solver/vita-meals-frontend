@@ -19,3 +19,8 @@ export interface FlashOptions {
     title: string;
     message: string;
 }
+
+export interface SignInPayload {
+    email: string;
+    password: string;
+}

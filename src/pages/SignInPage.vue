@@ -23,16 +23,17 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useAuthStore } from '../store';
+import {SignInPayload} from '../types' 
 
-const email = ref(null);
-const password = ref(null);
+const email = ref('');
+const password = ref('');
 
 const store = useAuthStore();
 
 const authenticateUser = () => {
-    const payload = {
-        "email": email.value,
-        "password": password.value,
+    const payload: SignInPayload = {
+        email: email.value,
+        password: password.value,
     }
     store.signin(payload);
 }
