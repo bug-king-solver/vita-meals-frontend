@@ -17,7 +17,7 @@
             >${{ props.product.price }}</span
           >
           <a
-            @click.prevent="handAddToCart"
+            @click.prevent="handleAddToCart"
             class="text-white bg-purple-600 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800 cursor-pointer"
           >
             Add to cart
@@ -32,6 +32,7 @@ import { RouterLink, useRouter } from 'vue-router';
 import { Product } from '../types';
 import { useFlash } from '../common/useFlash';
 import { useAuthStore } from '../store';
+import { useCartStore } from '../store/cart';
 
 const props = defineProps<{
   product: Product;
@@ -41,9 +42,11 @@ const router = useRouter();
 const {flash} = useFlash();
 
 const authStore = useAuthStore();
+const cartStore = useCartStore();
 
-const handAddToCart = () => {
+const handleAddToCart = () => {
   if (authStore.isAuthenticated) {
+    cartStore.addItemToCart(props.product.id, 1)
   } else {
     flash({
       iconType: "warning",

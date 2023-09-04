@@ -24,3 +24,17 @@ export interface SignInPayload {
     email: string;
     password: string;
 }
+
+export interface CartItem {
+    product: Product;
+    quantity: number;
+}
+
+export interface CartItemPayload {
+    cart_id: number;
+    product_id: number;
+}
+
+export interface RemoveCartItemPayload {
+    cart_id: number;
+}
