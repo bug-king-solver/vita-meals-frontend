@@ -17,7 +17,11 @@ import ProductItem from './ProductItem.vue';
 
 const store = useProductStore();
 store.fetchAllProducts({'keyword': ''});
-const handleSubmit = () => {
+const handleSubmit = (key: any) => {
+    let payload = {
+        'keyword': key
+    };
 
+    store.fetchAllProducts(payload);
 }
 </script>
