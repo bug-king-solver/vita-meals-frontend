@@ -11,15 +11,6 @@ interface User {
   // Add more properties as needed
 }
 
-interface AuthResponse {
-  user: User;
-  authorisation: {
-    token: string;
-  };
-  error: boolean;
-  message: string;
-}
-
 export const useAuthStore = defineStore('auth', () => {
     const router = useRouter()
 
@@ -82,8 +73,8 @@ export const useAuthStore = defineStore('auth', () => {
         .then((response) => {
           if (!response.data.error) {
             flash({
-                iconType: "succesws",
-                title: "log out",
+                iconType: "success",
+                title: "Log out",
                 message: response.data.message
             })
             user.value = null
@@ -100,7 +91,7 @@ export const useAuthStore = defineStore('auth', () => {
           }
           flash({
                 iconType: "error",
-                title: "auth error",
+                title: "Auth error",
                 message: errorStatus
           })
         })
