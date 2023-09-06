@@ -26,3 +26,13 @@ If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has a
 3. yarn dev
 
 The site is running http://localhost:5173
+
+## Docker
+
+```
+# Docker Build
+$ docker build -f Dockerfile -t client .
+
+# Docker Run
+$ docker run -it -p 8080:8080 client
+```
