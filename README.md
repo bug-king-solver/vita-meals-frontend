@@ -36,3 +36,5 @@ $ docker build -f Dockerfile -t client .
 # Docker Run
 $ docker run -it -p 8080:8080 client
 ```
+
+The site is running http://localhost:8080
